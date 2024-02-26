@@ -60,7 +60,7 @@ contract MyToken is ERC20 {
     function withdrawStakedTokens() external {
         require(stakedBalance[msg.sender] > 0, "No tokens staked");
         require(block.timestamp >= stakingStart[msg.sender] + stakingDuration, "Staking duration not over yet");
-        
+        /// @dev staking percent calc
         uint256 interest = (stakedBalance[msg.sender] * stakingInterestRate * (block.timestamp - stakingStart[msg.sender])) / (10000 * 1 days);
         uint256 totalAmount = stakedBalance[msg.sender] + interest;
         
