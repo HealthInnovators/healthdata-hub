@@ -23,7 +23,7 @@ contract MyToken is ERC20 {
         _;
     }
 
-    constructor(string memory name, string memory symbol) ERC20(name, symbol) {
+    constructor(string memory name, string memory symbol) ERC20(HEALTH, HLTH) {
         owner = msg.sender;
     }
 
@@ -43,7 +43,7 @@ contract MyToken is ERC20 {
         documents[user].accepted = true;
         
         // Give ERC20 tokens to user
-        _mint(user, 1000); // Adjust the amount of tokens as needed
+        _mint(user, 100); // Adjust the amount of tokens as needed
     }
 
     function stakeTokens(uint256 amount) external {
@@ -61,7 +61,7 @@ contract MyToken is ERC20 {
         require(stakedBalance[msg.sender] > 0, "No tokens staked");
         require(block.timestamp >= stakingStart[msg.sender] + stakingDuration, "Staking duration not over yet");
         /// @dev staking percent calc
-        uint256 interest = (stakedBalance[msg.sender] * stakingInterestRate * (block.timestamp - stakingStart[msg.sender])) / (10000 * 1 days);
+        uint256 interest = (stakedBalance[msg.sender] * stakingInterestRate * (block.timestamp - stakingStart[msg.sender])) / (1000 * 1 days);
         uint256 totalAmount = stakedBalance[msg.sender] + interest;
         
         // Transfer tokens back to user
